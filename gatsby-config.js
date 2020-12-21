@@ -1,18 +1,26 @@
 require(`dotenv`).config({
   path: `.env`,
-})
+});
 
-const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
+const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 
 module.exports = {
   siteMetadata: {
-    siteTitleAlt: `Minimal Blog - Gatsby Theme`,
+    siteTitle: `ゆるゆるWeb制作日記`,
+    siteTitleAlt: `自称エンジニアの開発奮闘記`,
+    siteHeadline: `ゆるゆるWeb制作日`,
+    // siteUrl: `https://minimal-blog.lekoarts.de`,
+    siteDescription: `自称エンジニアによるWeb制作奮闘記と日々のあれこれ。普段はWeb制作をメインにしながらも、ついつい痺れる技術を追い求めてしまう。`,
+    siteLanguage: `ja`,
+    siteImage: `/dog-toy`,
+    author: `KYOYA`,
   },
   plugins: [
     {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
       // See the theme's README for all available options
       options: {
+        preset: '@theme-ui/preset-funk',
         navigation: [
           {
             title: `Blog`,
@@ -26,11 +34,7 @@ module.exports = {
         externalLinks: [
           {
             name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
-          },
-          {
-            name: `Instagram`,
-            url: `https://www.instagram.com/lekoarts.de/`,
+            url: `https://twitter.com/gasamobile1`,
           },
         ],
       },
@@ -45,12 +49,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `ゆるゆるWeb制作日記`,
+        short_name: `ゆるゆるWeb制作日記`,
+        description: `自称エンジニアによるWeb制作奮闘記と日々のあれこれ。普段はWeb制作をメインにしながらも、ついつい痺れる技術を追い求めてしまう。`,
         start_url: `/`,
         background_color: `#fff`,
-        theme_color: `#6B46C1`,
+        theme_color: `#90CDF4`,
         display: `standalone`,
         icons: [
           {
@@ -77,4 +81,4 @@ module.exports = {
       },
     },
   ].filter(Boolean),
-}
+};

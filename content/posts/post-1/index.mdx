@@ -1,0 +1,217 @@
+---
+title: gatsby-starter-minimal-blog の機能が素晴らしい件について
+date: 2020−12−21
+description: gatsby-starter-minimal-blogがいい感じで気に入ったので、その機能のひとつであるシンタックスハイライトの見た目と書き方をご紹介。
+slug: '/about-minimal-blog'
+tags:
+  - Web開発
+  - Web制作
+  - Gatsbyjs
+banner: ./banner.jpg/
+---
+
+![バナー](./banner.jpg)
+
+## gatsby-starter-minimal-blog の機能が素晴らしい件について
+
+そもそもなぜ Gatsbyjs を使うのかについては改めて書くとして、試しに使ってみたテーマの gatsby-starter-minimal-blog が（初心者には）感動的な仕上がりだったので色々と中身を書き記しておこうと思います。
+
+### シンタックスハイライトがイケてる
+
+技術ブログとしてコードを載せたいときにかっこよく仕上がります。以下、サンプル記事から抜粋しました。
+
+- JavaScript はこんな感じです。※書き方[```js]
+
+```js
+(function() {
+
+var cache = {};
+var form = $('form');
+var minified = true;
+
+var dependencies = {};
+
+var treeURL = 'https://api.github.com/repos/PrismJS/prism/git/trees/gh-pages?recursive=1';
+var treePromise = new Promise(function(resolve) {
+	$u.xhr({
+		url: treeURL,
+		callback: function(xhr) {
+			if (xhr.status < 400) {
+				resolve(JSON.parse(xhr.responseText).tree);
+			}
+		}
+	});
+});
+```
+
+- react-live を追加すればプレビューも見れちゃいます。※書き方[```js react-live]
+
+```js react-live
+const onClick = () => {
+  alert('こんにちは、カリギュラ効果と申します。');
+};
+render(<button onClick={onClick}>押しちゃダメ</button>);
+```
+
+- コメント付きもいけます。※書き方[/** */とか//とかいつものやつ]
+
+```js
+/**
+ * Get value out of string (e.g. rem => px)
+ * If value is px strip the px part
+ * If the input is already a number only return that value
+ * @param {string | number} input
+ * @param {number} [rootFontSize]
+ * @return {number} Number without last three characters
+ * @example removeLastThree('6rem') => 6
+ */
+const getValue = (input, rootFontSize = 16) => {
+  if (typeof input === `number`) {
+    return input / rootFontSize;
+  }
+
+  const isPxValue = input.slice(-2) === `px`;
+
+  if (isPxValue) {
+    return parseFloat(input.slice(0, -2));
+  }
+
+  return parseFloat(input.slice(0, -3));
+};
+
+// This is a little helper function
+const helper = (a, b) => a + b;
+
+// This is also a little helper function but this time with a really long one-line comment that should show some more details
+const morehelper = (a, b) => a * b;
+
+export { getValue, helper, morehelper };
+```
+
+- 言語なしだとハイライトもありません。
+
+```
+import Test from "../components/test"
+
+const Layout = ({ children }) => (
+  <Test>
+    {children}
+  </Test>
+)
+
+export default Layout
+```
+
+- 個人的なお気に入りですが、タイトルつけてハイライトもつけられます。※書き方[```jsx:title=src/components/post.jsx {5-7,10}]
+
+```jsx:title=src/components/post.jsx {5-7,10}
+import React from "react";
+
+const Post = ({ data: { post } }) => (
+  <Layout>
+    <Heading variant="h2" as="h2">
+      {post.title}
+    </Heading>
+    <p
+      sx={{
+        color: `secondary`,
+        mt: 3,
+        a: { color: `secondary` },
+        fontSize: [1, 1, 2],
+      }}
+    >
+      <span>{post.date}</span>
+      {post.tags && (
+        <React.Fragment>
+          {` — `}
+          <ItemTags tags={post.tags} />
+        </React.Fragment>
+      )}
+    </p>
+    <section
+      sx={{
+        ...CodeStyles,
+        my: 5,
+        ".gatsby-resp-image-wrapper": { my: 5, boxShadow: `lg` },
+      }}
+    >
+      <MDXRenderer>{post.body}</MDXRenderer>
+    </section>
+  </Layout>
+);
+
+export default Post;
+```
+
+- 行番号なしのテキストも書けます。コピー機能が意外と便利かも。※書き方[```text noLineNumbers]
+
+```text noLineNumbers
+Harry Potter and the Chamber of Secrets
+```
+
+- タイトルなしのハイライトありバージョン。※書き方[```js {2,4-5}]
+
+```js {2,4-5}
+const test = 3;
+const foo = 'bar';
+const harry = 'potter';
+const hermione = 'granger';
+const ron = 'weasley';
+```
+
+- インラインでコードを埋め込んでみる。※書き方[`inline code` ]
+
+Here will `inline code` go, just inside the text. Wow!
+
+- 行番号なしだけどハイライト、言語、タイトルありの変化球。※書き方[```tsx:title=src/components/blog.tsx {7-9,16} noLineNumbers]
+
+```tsx:title=src/components/blog.tsx {7-9,16} noLineNumbers
+import React from "react";
+
+const Blog = ({ posts }: PostsProps) => {
+  const { tagsPath, basePath } = useSiteMetadata();
+
+  return (
+    <Layout>
+      <Flex sx={{ alignItems: `center`, justifyContent: `space-between` }}>
+        <Heading variant="h2" as="h2">
+          Blog
+        </Heading>
+        <Styled.a
+          as={Link}
+          sx={{ variant: `links.secondary` }}
+          to={`/${basePath}/${tagsPath}`.replace(/\/\/+/g, `/`)}
+        >
+          View all tags
+        </Styled.a>
+      </Flex>
+      <Listing posts={posts} sx={{ mt: [4, 5] }} />
+    </Layout>
+  );
+};
+
+export default Blog;
+```
+
+非常にごちゃついてお腹いっぱいになってきてしまったので、これくらいにしておきます。
+
+コードハイライト自体は珍しいものではないので何を今更感が否めませんが、自作ブログでここまでいい感じにコードを書けるなんてイケてません？
+
+<small>
+  ※本当は react コンポーネントととして spotify player
+  を埋め込めるのですが、エラーが出まくって仕方がないので後日改めます。
+</small>
+
+---
+
+### lekoarts さんについて
+
+本テーマ作成者の LekoArts さんは、ドイツ出身のグラフィックデザイナー&フロントエンドエンジニアだそうで、このテーマの他にも[ノリノリな gatsby theme](https://themes.lekoarts.de/)を配布されています。
+
+こちらの[ポートフォリオサイト](https://www.lekoarts.de/en/)も明らかにセンスの良くてため息がでますね。
+
+---
+
+この gatsby theme は研究のしがいがありそうなので、もっと探求していこうと思います。
+
+ではでは。
