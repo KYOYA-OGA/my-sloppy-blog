@@ -12,7 +12,6 @@ module.exports = {
     // siteUrl: `https://minimal-blog.lekoarts.de`,
     siteDescription: `自称エンジニアによるWeb制作奮闘記と日々のあれこれ。普段はWeb制作をメインにしながらも、ついつい痺れる技術を追い求めてしまう。`,
     siteLanguage: `ja`,
-    siteImage: `/dog-toy`,
     author: `KYOYA`,
   },
   plugins: [
