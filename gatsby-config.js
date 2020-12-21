@@ -7,8 +7,8 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE;
 module.exports = {
   siteMetadata: {
     siteTitle: `ゆるゆるWeb制作日記`,
-    siteTitleAlt: `自称エンジニアの開発奮闘記`,
-    siteHeadline: `ゆるゆるWeb制作日`,
+    siteTitleAlt: `ゆるゆるWeb制作日`,
+    siteHeadline: `自称エンジニアの開発奮闘記`,
     // siteUrl: `https://minimal-blog.lekoarts.de`,
     siteDescription: `自称エンジニアによるWeb制作奮闘記と日々のあれこれ。普段はWeb制作をメインにしながらも、ついつい痺れる技術を追い求めてしまう。`,
     siteLanguage: `ja`,
